@@ -1,0 +1,3 @@
+#!/home/alina/gb_ml_for_business/machine-learning-for-business/PROJECT-Sberbank-housing-market/project-env/bin/python3
+from numba.pycc import main
+main()
