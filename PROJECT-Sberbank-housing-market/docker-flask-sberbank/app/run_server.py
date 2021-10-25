@@ -8,6 +8,7 @@
 
 # import the necessary packages
 import dill
+from numpy import NaN
 import pandas as pd
 import os
 dill._dill._reverse_typemap['ClassType'] = type
@@ -21,7 +22,7 @@ from time import strftime
 # 	feature_names = f.readlines()[0].split()
 
 feature_names = '''
-	timestamp full_sq life_sq floor max_floor material build_year num_room 
+	id timestamp full_sq life_sq floor max_floor material build_year num_room 
 	kitch_sq state product_type sub_area area_m raion_popul green_zone_part indust_part children_preschool
 	preschool_quota preschool_education_centers_raion children_school school_quota school_education_centers_raion 
 	school_education_centers_top_20_raion hospital_beds_raion healthcare_centers_raion university_top_20_raion 
@@ -74,7 +75,7 @@ handler = RotatingFileHandler(filename='app.log', maxBytes=100000, backupCount=1
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 logger.addHandler(handler)
-
+logger.info('enter log!')
 def load_model(model_path):
 	# load the pre-trained model
 	global model
@@ -105,7 +106,7 @@ def predict():
 			if request_json[feat]:
 				d[feat] = request_json[feat]
 			else:
-				d[feat] = None	
+				d[feat] = NaN	
 
 		logger.info(f'{dt} Data received')
 		try:
